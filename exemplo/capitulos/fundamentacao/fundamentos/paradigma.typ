@@ -1,4 +1,4 @@
-#import "../../../../src/lib.typ": figura_legendada
+#import "../../../../src/lib.typ": figura
 
 === Paradigma de Programação
 
@@ -6,10 +6,10 @@ Um paradigma de programação pode ser definido como um conjunto de princípios 
 
 Os paradigmas são organizados em categorias, podendo ser vistos como uma hierarquia, assim como a figura abaixo mostra:
 
-#figura_legendada(
+#figura(
 	[Paradigmas de programação organizados hierarquicamente.],
 	image("../../../imagens/hierarquia_paradigmas.png", height: 35%),
-	[Fonte: adaptado de #cite(<whatsprogrammingparadigm>, form: "prose").],
+	[adaptado de #cite(<whatsprogrammingparadigm>, form: "prose").],
 )
 
 Com base na figura, observa-se a relevância dos paradigmas imperativo e declarativo, já que todos os outros paradigmas derivam, em maior ou menor grau, de um desses dois. Por mais que paradigmas mais específicos possam tomar rumos inesperados, eles ainda terão algum grau de herança dos paradigmas imperativo ou declarativo.

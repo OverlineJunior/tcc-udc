@@ -20,6 +20,18 @@
 )
 #show: codly-init
 
+#quadro(
+  [_Benchmark_ da biblioteca Logos.],
+  table(
+    columns: 2,
+    table.header([Teste], [_Benchmark_]),
+    [Identificadores], [647 ns/iter (+/- 27) = 1204 MB/s],
+    [Palavras-chave, operadores e pontuações], [2,054 ns/iter (+/- 78) = 1037 MB/s],
+    [Strings], [553 ns/iter (+/- 34) = 1575 MB/s],
+  ),
+  [#cite(<logos>, form: "prose").],
+)
+
 #include "capitulos/introducao.typ"
 
 #include "capitulos/fundamentacao.typ"

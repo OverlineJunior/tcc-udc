@@ -1,10 +1,10 @@
-#import "../../../../src/lib.typ": figura_legendada
+#import "../../../../src/lib.typ": tabela, codigo
 
 === Biblioteca Logos
 
 Logos é uma biblioteca de análise léxica para Rust. Ela consiste na definição de _tokens_ através de _macros_ e expressões regulares, tornando o código extremamente conciso.
 
-#figura_legendada(
+#codigo(
     [Análise léxica para uma calculadora usando a biblioteca Logos.],
     ```rust
     use logos::Logos;
@@ -47,7 +47,7 @@ Logos é uma biblioteca de análise léxica para Rust. Ela consiste na definiç�
 
 Além da simplicidade na definição dos _tokens_, o analisador léxico gerado é extremamente rápido, como mostra o _benchmark_ no repositório oficial da biblioteca:
 
-#figura_legendada(
+#tabela(
     [_Benchmark_ da biblioteca Logos.],
     table(
         columns: (auto, auto),

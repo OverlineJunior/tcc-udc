@@ -89,23 +89,31 @@
   ]
 
   // Lista de itens.
-  #let entry_de_figura(entry) = link(
+
+  #let entry-de-figura(entry) = link(
     entry.element.location(),
     entry.indented([#entry.prefix()#h(0.5em)–], entry.inner()),
   )
 
-  #show outline.where(target: selector(figure.where(kind: image))): it => {
-    show outline.entry: it => entry_de_figura(it)
+  // TODO! Não deviamos precisar repetir o código para cada tipo de figure.
+
+  #show outline.where(target: selector(figure.where(kind: "figura"))): it => {
+    show outline.entry: it => entry-de-figura(it)
     it
   }
 
-  #show outline.where(target: selector(figure.where(kind: table))): it => {
-    show outline.entry: it => entry_de_figura(it)
+  #show outline.where(target: selector(figure.where(kind: "quadro"))): it => {
+    show outline.entry: it => entry-de-figura(it)
     it
   }
 
-  #show outline.where(target: selector(figure.where(kind: raw))): it => {
-    show outline.entry: it => entry_de_figura(it)
+  #show outline.where(target: selector(figure.where(kind: "tabela"))): it => {
+    show outline.entry: it => entry-de-figura(it)
+    it
+  }
+
+  #show outline.where(target: selector(figure.where(kind: "código"))): it => {
+    show outline.entry: it => entry-de-figura(it)
     it
   }
 
@@ -176,11 +184,11 @@
     #it
   ]
 
-  #show table: block.with(stroke: (top: 1pt, bottom: 1pt))
+  // #show table: block.with(stroke: (top: 1pt, bottom: 1pt))
 
-  #set table(stroke: (_, y) => if y == 0 { (bottom: 0.5pt) })
+  // #set table(stroke: (_, y) => if y == 0 { (bottom: 0.5pt) })
 
-  #show table.cell.where(y: 0): strong
+  // #show table.cell.where(y: 0): strong
 
   #set quote(block: true)
 
@@ -201,11 +209,13 @@
 
   #folha_de_rosto(aluno, orientador, titulo, natureza, local, data)
 
-  #outline(title: "Lista de Figuras", target: figure.where(kind: image))
+  #outline(title: "Lista de Figuras", target: figure.where(kind: "figura"))
 
-  #outline(title: "Lista de Tabelas e Quadros", target: figure.where(kind: table))
+  #outline(title: "Lista de Tabelas", target: figure.where(kind: "tabela"))
 
-  #outline(title: "Lista de Códigos", target: figure.where(kind: raw))
+  #outline(title: "Lista de Quadros", target: figure.where(kind: "quadro"))
+
+  #outline(title: "Lista de Códigos", target: figure.where(kind: "código"))
 
   #outline(title: "Sumário")
   #metadata("fim_sumario") <fim_sumario>

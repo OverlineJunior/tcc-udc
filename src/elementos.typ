@@ -54,45 +54,47 @@
   #pagebreak()
 ]
 
-#let figura(titulo, imagem, fonte) = {
-  set figure(caption: titulo, gap: 0.7em, supplement: [FIGURA])
-  set figure.caption(position: top, separator: [ — ])
-  set stack(dir: ttb, spacing: 0.7em)
-  set align(center)
-
-  figure(
-    stack(
-      imagem,
-      text(size: TAMANHOS_FONTE.minusculo)[FONTE: #fonte],
-    ),
+// TODO! Fonte pode aparecer em outra página ao invés de ficar junto com a figura.
+#let _figura-com-fonte(titulo, corpo, fonte, tipo) = {
+  set figure(
+    caption: titulo,
+    gap: 0.7em,
+    supplement: upper(tipo),
+    kind: tipo,
   )
+  set figure.caption(position: top, separator: [ — ])
+
+  set par(spacing: 0.25em)
+
+  figure(corpo)
+
+  align(center, text(size: TAMANHOS_FONTE.minusculo)[FONTE: #fonte])
 }
 
-#let figura_legendada(titulo, corpo, ..legendas) = {
-  let arg_num = legendas.pos().len()
+#let figura(titulo, corpo, fonte) = {
+  _figura-com-fonte(titulo, corpo, fonte, "figura")
+}
 
-  set figure(caption: titulo)
-  set stack(dir: ttb, spacing: 1em)
+#let tabela(titulo, corpo, fonte) = {
+  // TODO! E se for uma tabela que não se encaixa no modelo de "y = 0 => título de coluna"? O mesmo se aplica para quadros.
+  set table(
+    align: horizon,
+    stroke: (_, y) => if y == 0 { (bottom: 1pt) },
+  )
+  show table: block.with(stroke: (top: 1pt, bottom: 1pt))
+  show table.cell.where(y: 0): strong
 
-  if arg_num == 1 {
-    figure(stack(
-      corpo,
-      align(start, text(size: 10pt, legendas.at(0))),
-    ))
-  } else if arg_num == 2 {
-    figure(stack(
-      corpo,
-      align(start, text(size: 10pt, legendas.at(0))),
-      align(start, text(size: 10pt, legendas.at(1))),
-    ))
-  } else if arg_num == 3 {
-    figure(stack(
-      corpo,
-      align(start, text(size: 10pt, legendas.at(0))),
-      align(start, text(size: 10pt, legendas.at(1))),
-      align(start, text(size: 10pt, legendas.at(2))),
-    ))
-  } else {
-    panic("Número de legendas não suportado.")
-  }
+  _figura-com-fonte(titulo, corpo, fonte, "tabela")
+}
+
+#let quadro(titulo, corpo, fonte) = {
+  set table(align: horizon)
+  show table: block.with(stroke: (top: 1pt, bottom: 1pt))
+  show table.cell.where(y: 0): strong
+
+  _figura-com-fonte(titulo, corpo, fonte, "quadro")
+}
+
+#let codigo(titulo, corpo, fonte) = {
+  _figura-com-fonte(titulo, corpo, fonte, "código")
 }

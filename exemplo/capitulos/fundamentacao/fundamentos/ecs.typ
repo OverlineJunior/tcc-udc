@@ -1,4 +1,4 @@
-#import "../../../../src/lib.typ": figura_legendada
+#import "../../../../src/lib.typ": figura, codigo
 
 ===	Entity Component System
 
@@ -16,17 +16,17 @@ Com base na explicação de #cite(<ecsfaq>, form: "prose"), pode-se dizer que o 
 - Componentes: estruturas de dados que armazenam informações específicas. Uma entidade pode ter múltiplos componentes diferentes, definindo suas características;
 - Sistemas: funções responsáveis por processar sobre entidades com um determinado conjunto de componentes — processo denominado querying.
 
-#figura_legendada(
+#figura(
     [Relação entre entidades, componentes e sistemas.],
     image("../../../imagens/diagrama_ecs.png", height: 35%),
-    [Fonte: elaboração própria.],
+    [elaboração própria.],
 )
 
 Como a figura acima ilustra, o estado da aplicação é dado por um conjunto de entidades, cada uma com seus respectivos componentes. Os sistemas são responsáveis pela transformação do estado da aplicação, processando as entidades que possuem os componentes necessários para a execução do sistema.
 
 Em termos de código, o padrão ECS pode ser representado sem nenhum construto especializado, mapeando entidades para números únicos, componentes para _structs_ e sistemas para funções:
 
-#figura_legendada(
+#codigo(
     [Implementação simplificada de um padrão ECS incompleto.],
     ```rs
     // Componentes podem ser representados através de simples structs.
@@ -69,7 +69,7 @@ Em termos de código, o padrão ECS pode ser representado sem nenhum construto e
         }
     }
     ```,
-    [Fonte: elaboração própria.],
+    [elaboração própria.],
 )
 
 É importante ressaltar que o código acima, por mais que seja funcional e siga o design orientado a dados, ainda é uma simplificação da implementação de um padrão ECS incompleto. Na prática, o armazenamento dos dados é feito através de estruturas de dados mais complexas @ecsstorageinpics, que permitem que entidades escolham quais componentes possuem, que sistemas sejam executados automaticamente, além de outras funcionalidades principais do padrão ECS.
@@ -80,10 +80,10 @@ Fora a definição de ECS e seus três elementos fundamentais, o padrão ainda p
 
 O agendador é um construto com a finalidade de executar todos os sistemas da aplicação, podendo determinar a ordem e frequência de execução de forma declarativa, resolvendo dependência entre sistemas e tornando o ciclo de atualização da aplicação mais previsível @bevy. Pode-se dizer que, dentre os conceitos mais experimentais, o agendador é o mais próximo de uma formalização.
 
-#figura_legendada(
+#figura(
     [Agendador executando os sistemas de forma cíclica e sequencial.],
     image("../../../imagens/diagrama_agendador.png", height: 30%),
-    [Fonte: elaboração própria.],
+    [elaboração própria.],
 )
 
 ==== Relacionamento de Entidades
@@ -92,28 +92,26 @@ Independente da aplicação, é muito comum a necessidade de relacionar diferent
 
 Relacionamento de entidades (do inglês, _entity relationship_) é um conceito que supre essa necessidade, permitindo que entidades se relacionem entre si. O autor da biblioteca Flecs, #cite(<flecs>, form: "author"), explica o conceito fazendo uma paralela com o simples ato de adicionar um componente a uma entidade:
 
-#figura_legendada(
+#figura(
     [Entidade com um componente de posição.],
     image("../../../imagens/entidade_posicao.png", height: 6%),
-    [```ts Entidade.set<Posição>({0, 0});```],
-    [Fonte: #cite(<entityrelationships>, form: "prose").],
+    [#cite(<entityrelationships>, form: "prose").],
 )
 
 Do mesmo jeito que se adiciona um único componente a uma entidade, como mostra a figura acima, pode-se criar um relacionamento entre duas entidades adicionando uma tupla componente-entidade, onde o componente dita o tipo de relação:
 
-#figura_legendada(
+#figura(
     [Representação do relacionamento entre o Sol, a Terra e a Lua.],
     image("../../../imagens/relacionamento_entidades.png", height: 13%),
-    [```cs Terra.add(FilhoDe, Sol); Lua.add(FilhoDe, Terra);```],
-    [Fonte: adaptado de #cite(<entityrelationships>, form: "prose").],
+    [adaptado de #cite(<entityrelationships>, form: "prose").],
 )
 
 ==== Depurador de ECS
 
 Um depurador especializado em ECS é uma interface, gráfica ou não, responsável por ajudar o desenvolvedor a encontrar e resolver bugs relacionados ao ECS na aplicação. Tal depurador pode visualizar todas as entidades da aplicação, além  de seus respectivos componentes. Ele também pode listar os sistemas em execução e permitir o controle sobre eles, como pausar ou alterar a ordem de execução.
 
-#figura_legendada(
+#figura(
     [Flex Explorer, depurador visual para a biblioteca Flecs.],
     image("../../../imagens/flecs_explorer.png", height: 30%),
-    [Fonte: #cite(<flecsexplorer>, form: "prose").],
+    [#cite(<flecsexplorer>, form: "prose").],
 )

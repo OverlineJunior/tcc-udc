@@ -1,4 +1,4 @@
-#import "../../../../src/lib.typ": figura_legendada
+#import "../../../../src/lib.typ": tabela, codigo
 
 === Biblioteca Chumsky
 
@@ -6,7 +6,7 @@ Chumsky é uma biblioteca de análise sintática para Rust. Ela é baseada no co
 
 Ao usar a biblioteca para construir um _parser_, nota-se a influência do paradigma funcional. Por mais que seja um paradigma mais incomum, seu uso na biblioteca torna o processo de construção do _parser_ muito parecido com a construção de uma gramática formal:
 
-#figura_legendada(
+#codigo(
     [_Parser_ para uma gramática de expressões aritméticas simples usando a biblioteca Chumsky.],
     ```rust
     use chumsky::prelude::*;
@@ -68,12 +68,12 @@ Ao usar a biblioteca para construir um _parser_, nota-se a influência do paradi
         parser().parse("-2 * 3 + 5");
     }
     ```,
-    [Fonte: adaptado de #cite(<chumsky>, form: "prose").],
+    [adaptado de #cite(<chumsky>, form: "prose").],
 )
 
 De acordo com a classificação do _benchmark_ da biblioteca e seus competidores, localizada no repositório oficial, Chusmky tem a capacidade de ser a biblioteca de análise sintática mais rápida para Rust:
 
-#figura_legendada(
+#tabela(
     [Classificação do _benchmark_ da biblioteca Chumsky e competidores.],
     table(
         columns: 3,
@@ -105,7 +105,7 @@ De acordo com a classificação do _benchmark_ da biblioteca e seus competidores
         [pom],
         [13.730 ms],
     ),
-    [Fonte: #cite(<chumsky>, form: "prose").],
+    [#cite(<chumsky>, form: "prose").],
 )
 
 Por fim, o uso da biblioteca Chumsky estará na implementação da análise sintática, e será utilizada em conjunto com a biblioteca Logos na implementação do interpretador como um todo. Assim como foi o caso com Logos, a escolha de Chumsky se deve à sua maturidade.
